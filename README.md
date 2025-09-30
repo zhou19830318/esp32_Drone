@@ -1,7 +1,5 @@
 # ESP32 飞控（MicroPython 版本）
 
-本仓库在 `src/` 目录下提供了将原始 Arduino/C++ 工程（`Anglemode_flightcontroller_ver3.1.ino` 与 `ESP32_Servo.*`）完整迁移到 MicroPython 的实现。迁移版本严格保留了所有原始的函数名与变量名，以便于对照原始 Arduino 项目进行调试与二次开发。
-
 本 README 面向技术人员，介绍硬件连接、运行部署方法、控制逻辑（IMU 读取、滤波、PID、混控、解锁/安全）以及常见问题与二次开发建议。
 
 ---
@@ -229,3 +227,4 @@
 请参阅仓库根目录的 `LICENSE` 文件。
 
 ---
+
