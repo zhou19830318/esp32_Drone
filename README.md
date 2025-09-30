@@ -6,12 +6,12 @@
 
 ## 文件结构
 
-- `src/Anglemode_flightcontroller_ver3.1.py`
+- `src/Anglemode_flightcontroller_ver0.1.py`
   - 主控制循环与所有飞控逻辑（setup/loop、IMU 数据采集、互补滤波、双层 PID、混控、解锁/安全保护）。
   - 严格保留原始函数与变量命名：如 `setup()`, `loop()`, `gyro_signals()`, `kalman_1d()`, `PID` 相关变量、接收机/电机输入输出变量等。
 
-- `src/ESP32_Servo.py`
-  - 替代 `ESP32_Servo.cpp/.h` 的 MicroPython 版本，提供相同的类与方法接口：
+- `ESP32_Servo.py`
+  - MicroPython版本，提供类与方法接口：
     - `Servo.attach(pin, min, max)`
     - `Servo.writeMicroseconds(us)`
     - `Servo.readMicroseconds()`
@@ -19,11 +19,6 @@
     - `Servo.detach()`
     - `Servo.attached()`
     - `Servo.setTimerWidth(width)`, `Servo.readTimerWidth()`（兼容桩函数）
-
-- 原始 Arduino/C++ 文件保留用于对照：
-  - `src/Anglemode_flightcontroller_ver3.1.ino`
-  - `src/ESP32_Servo.cpp`
-  - `src/ESP32_Servo.h`
 
 ---
 
@@ -71,9 +66,9 @@
 - 在 ESP32-S3 上烧录 MicroPython 固件（官方或社区版本）。
 - 通过 Thonny/mpremote/rshell 等工具将以下文件复制到设备文件系统：
   - `src/ESP32_Servo.py`
-  - `src/Anglemode_flightcontroller_ver3.1.py`
+  - `src/Anglemode_flightcontroller_ver0.1.py`
 
-> 如果需要上电自动运行，建议将 `Anglemode_flightcontroller_ver3.1.py` 重命名为 `main.py` 或在 `main.py` 中导入并启动相应逻辑。
+> 如果需要上电自动运行，建议将 `Anglemode_flightcontroller_ver0.1.py` 重命名为 `main.py` 或在 `main.py` 中导入并启动相应逻辑。
 
 ---
 
@@ -81,15 +76,15 @@
 
 1. 将硬件按“引脚映射”一节正确连接。
 2. 上电前确保 ESC 与电机的供电与信号地正确共地。
-3. 将 `ESP32_Servo.py` 与 `Anglemode_flightcontroller_ver3.1.py` 复制到板子。
+3. 将 `ESP32_Servo.py` 与 `Anglemode_flightcontroller_ver0.1.py` 复制到板子。
 4. 在 REPL 或 `main.py` 中启动：
-   - 方式 A（自动运行）：将 `Anglemode_flightcontroller_ver3.1.py` 重命名为 `main.py`，上电自动执行
+   - 方式 A（自动运行）：将 `Anglemode_flightcontroller_ver0.1.py` 重命名为 `main.py`，上电自动执行
    - 方式 B（手动运行）：在 REPL 中执行：
-     - `import Anglemode_flightcontroller_ver3_1`
-     - `Anglemode_flightcontroller_ver3_1.setup()`
-     - 然后循环调用 `Anglemode_flightcontroller_ver3_1.loop()`（或如文件底部 `__main__` 中的结构）
+     - `import Anglemode_flightcontroller_ver0_1`
+     - `Anglemode_flightcontroller_ver0_1.setup()`
+     - 然后循环调用 `Anglemode_flightcontroller_ver0_1.loop()`（或如文件底部 `__main__` 中的结构）
 
-> 当前 `Anglemode_flightcontroller_ver3.1.py` 文件内部带有：
+> 当前 `Anglemode_flightcontroller_ver0.1.py` 文件内部带有：
 > ```
 > if __name__ == "__main__":
 >     setup()
@@ -204,7 +199,6 @@
 
 ## 二次开发建议
 
-- 变量与函数名与原始 C++ 完全一致，建议对照 `src/Anglemode_flightcontroller_ver3.1.ino` 与 `src/Anglemode_flightcontroller_ver3.1.py`进行逐段比对。
 - 若需增加日志输出或上位机通信，建议在 `loop()` 尾部添加非阻塞式发送，并注意 4ms 时间预算。
 - 若需切换滤波器（如改用 Kalman），可复用已有的 `kalman_1d()` 框架，保持 `Kalman1DOutput` 的数据接口一致。
 - 若要变更引脚或频率，集中修改以下位置：
@@ -221,10 +215,3 @@
 - 调试时建议在稳定桌面/支架上进行，避免飞控算法未调优造成风险。
 
 ---
-
-## 许可证
-
-请参阅仓库根目录的 `LICENSE` 文件。
-
----
-
