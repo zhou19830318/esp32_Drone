@@ -6,7 +6,7 @@
 
 ## 文件结构
 
-- `src/Anglemode_flightcontroller_ver0.1.py`
+- `Anglemode_flightcontroller_ver0.1.py`
   - 主控制循环与所有飞控逻辑（setup/loop、IMU 数据采集、互补滤波、双层 PID、混控、解锁/安全保护）。
   - 严格保留原始函数与变量命名：如 `setup()`, `loop()`, `gyro_signals()`, `kalman_1d()`, `PID` 相关变量、接收机/电机输入输出变量等。
 
@@ -215,3 +215,4 @@
 - 调试时建议在稳定桌面/支架上进行，避免飞控算法未调优造成风险。
 
 ---
+
